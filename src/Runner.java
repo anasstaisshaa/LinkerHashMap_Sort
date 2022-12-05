@@ -1,7 +1,4 @@
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Runner {
     public static void main(String[] args) {
@@ -17,6 +14,8 @@ public class Runner {
         map.put(8,9);
         map.put(9,1);
 
+        Map<Integer, Integer> result = new LinkedHashMap<>();
+
         System.out.println(map.values());
 
         for (Integer value : map.values()) {
@@ -26,8 +25,13 @@ public class Runner {
                     sum++;
                 }
             }
-            System.out.println("number "+ value + " " + sum + " repeats times");
+            result.put(value, sum);
         }
+        System.out.println(result);
+        result.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
+                .forEach(System.out::println);
     }
 
 }
